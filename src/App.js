@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
+import InvoiceList from "./InvoiceList";
+import AddNewInvoice from "./AddNewInvoice";
+import { Button } from "@mui/material";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <nav>
+        <Button component={Link} to="/">Invoices</Button>
+        <Button component={Link} to="/add">Add New Invoice</Button>
+      </nav>
+      {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+      <Routes>
+        <Route path="/" element={<InvoiceList />} />
+        <Route path="/add" element={<AddNewInvoice />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App;
+
+
+
