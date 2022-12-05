@@ -8,8 +8,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <nav>
-        <Button component={Link} to="/">Invoices</Button>
-        <Button component={Link} to="/add">Add New Invoice</Button>
+        <Button component={Link} to="/">
+          Invoices
+        </Button>
+        <Button component={Link} to="/add">
+          Add New Invoice
+        </Button>
       </nav>
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -20,7 +24,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-
-
-
