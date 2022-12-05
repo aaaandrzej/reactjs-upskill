@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import InvoiceList from "./InvoiceList";
-import AddNewInvoice from "./AddNewInvoice";
+import AddNewInvoiceForm from "./AddNewInvoice";
 import { Button } from "@mui/material";
 
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
             renders the first one that matches the current URL. */}
       <Routes>
         <Route path="/" element={<InvoiceList />} />
-        <Route path="/add" element={<AddNewInvoice />} />
+        <Route path="/add" element={<AddNewInvoiceForm />} />
       </Routes>
     </BrowserRouter>
   );
