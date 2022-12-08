@@ -9,9 +9,11 @@ export default function App() {
     <BrowserRouter>
       <Navigation />
       <Routes>
-        <Route path="/" element={<InvoiceList />} />
-        <Route path="/create" element={<AddNewInvoiceForm />} />
+        <Route path={RoutePaths["list"]} element={<InvoiceList />} />
+        <Route path={RoutePaths["add"]} element={<AddNewInvoiceForm />} />
       </Routes>
     </BrowserRouter>
   );
 }
+
+export const RoutePaths = require("./routes.json");
