@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import { RoutePaths } from "../../App";
 
-export const Navigation = () => (
+export const Navigation = (routes) => (
   <nav>
-    <LinkButton to={RoutePaths["list"]} label="Invoices"></LinkButton>
-    <LinkButton to={RoutePaths["add"]} label="Add New Invoice"></LinkButton>
+    {routes.map(({ route, label }) => (
+      <LinkButton to={route} label={label} key={route} />
+    ))}
   </nav>
 );
 
