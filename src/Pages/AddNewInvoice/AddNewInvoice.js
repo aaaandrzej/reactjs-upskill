@@ -1,5 +1,17 @@
 import * as React from "react";
 
+import { useForm } from "react-hook-form";
+
 export default function AddNewInvoiceForm() {
-  return <h2>Placeholder for adding a new invoice</h2>;
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register("firstName", { required: true, maxLength: 20 })} />
+      <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
+      <input type="number" {...register("age", { min: 18, max: 99 })} />
+      <input type="submit" />
+    </form>
+  );
 }
