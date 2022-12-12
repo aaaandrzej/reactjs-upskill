@@ -97,7 +97,7 @@ export function Navigation({ routes }) {
               }}
             >
               {Object.values(routes).map(({ route, label }) => (
-                // TODO 1 - fix styling as it's lost now
+                // TODO 1 fix styling as it's lost now
                 // TODO 2 extract route mapping to a function
                 <Link to={route} key={label}>
                   <MenuItem onClick={handleCloseNavMenu}>
@@ -132,7 +132,7 @@ export function Navigation({ routes }) {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {Object.values(routes).map(({ route, label }) => (
-              // TODO extract route mapping to a function
+              // TODO 2 extract route mapping to a function
               <Link to={route} key={label}>
                 <Button
                   onClick={handleCloseNavMenu}

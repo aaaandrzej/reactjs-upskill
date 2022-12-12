@@ -6,6 +6,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Link } from "react-router-dom";
+
 import { rows } from "./mockedData";
 
 export default function InvoiceList() {
@@ -15,25 +19,35 @@ export default function InvoiceList() {
         <TableHead>
           <TableRow>
             <TableCell>No.</TableCell>
-            <TableCell align="right">Created</TableCell>
-            <TableCell align="right">Valid until</TableCell>
+            <TableCell align="right">Date</TableCell>
+            <TableCell align="right">Recipent Name</TableCell>
             <TableCell align="right">Amount</TableCell>
+            <TableCell align="right">Paid</TableCell>
             <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.no}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.no}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.date.toDateString()}</TableCell>
+              <TableCell align="right">{row.recipentName}</TableCell>
+              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell align="right">{row.paid}</TableCell>
+              <TableCell>
+                {/* TODO redirect actions properly */}
+                <Link to="/create">
+                  <EditIcon />
+                </Link>
+                <Link>
+                  <DeleteIcon />
+                </Link>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

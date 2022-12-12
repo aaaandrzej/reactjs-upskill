@@ -1,10 +1,10 @@
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(no, date, recipentName, amount, paid) {
+  return { no, date, recipentName, amount, paid };
 }
 export const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData(1, new Date("Fri, 01 Jan 1971 00:00:00 GMT"), "Jerry", 24, "yes"),
+  createData(2, new Date("Sat, 02 Jan 1971 00:00:00 GMT"), "Merry", 4, "yes"),
+  createData(3, new Date("Sun, 03 Jan 1971 00:00:00 GMT"), "Berry", 124, "no"),
+  createData(4, new Date("Mon, 04 Jan 1971 00:00:00 GMT"), "Gerry", 234, "yes"),
+  createData(5, new Date("Tue, 05 Jan 1971 00:00:00 GMT"), "Derry", 524, "no"),
 ];
