@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -144,8 +144,53 @@ export function Navigation({ routes }) {
               </Link>
             ))}
           </Box>
+          <Info />
         </Toolbar>
       </Container>
     </AppBar>
   );
+}
+
+const Info = () => {
+  const [showInfo, setShowInfo] = useState(false);
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          setShowInfo(true);
+        }}
+      >
+        I
+      </button>
+      {showInfo && (
+       <Modal setShowInfo={setShowInfo} />
+      )}
+    </div>
+  );
+};
+
+const Modal = ({setShowInfo}) => {
+  return (
+     <Box
+          sx={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            width: "50%",
+            height: "50%",
+            background: "red",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          Info{" "}
+          <button
+            onClick={() => {
+              setShowInfo(false);
+            }}
+          >
+            Close
+          </button>
+        </Box>
+  )
 }
