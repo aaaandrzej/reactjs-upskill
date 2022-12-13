@@ -33,15 +33,16 @@ export default function InvoiceList() {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.no}
+                <Link to={"/invoice/" + row.no}>{row.no}</Link>
               </TableCell>
               <TableCell align="right">{row.date.toDateString()}</TableCell>
               <TableCell align="right">{row.recipentName}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
               <TableCell align="right">{row.paid}</TableCell>
-              <TableCell>
+              <TableCell align="right">
                 {/* TODO redirect actions properly */}
-                <Link to="/create">
+                {/* TODO do we need : after second / ? */}
+                <Link to={"/invoice/" + row.no}>
                   <EditIcon />
                 </Link>
                 <Link>
