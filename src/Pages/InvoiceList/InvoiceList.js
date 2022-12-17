@@ -10,7 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
-import { rows } from "./mockedData";
+import { rows } from "../mockedData";
 
 export default function InvoiceList() {
   return (
@@ -41,7 +41,6 @@ export default function InvoiceList() {
               <TableCell align="right">{row.paid}</TableCell>
               <TableCell align="right">
                 {/* TODO redirect actions properly */}
-                {/* TODO do we need : after second / ? */}
                 <Link to={"/invoice/" + row.no}>
                   <EditIcon />
                 </Link>

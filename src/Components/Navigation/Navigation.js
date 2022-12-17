@@ -11,25 +11,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import InfoIcon from "@mui/icons-material/Info";
+import CloseIcon from "@mui/icons-material/Close";
 
-// TODO extract RouteItems to a function like below so it can be used with different nodes
-// export const RouteItems = ({routes}) => (
-//     Object.values(routes).map(({ route, label }) => (
-//      <Link to={route} label={label} key={route}>
-//      *children*
-//      </Link>
-//     ))
-// );
-
-// const LinkButton = ({ to, label }) => {
-//   return (
-//     <Link to={to}>
-//       <Button>{label}</Button>
-//     </Link>
-//   );
-// };
-
-const siteName = "Księgowość Kogucik";
+import strings from "../../strings.json";
 
 export function Navigation({ routes }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -40,6 +25,32 @@ export function Navigation({ routes }) {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const RouteItems = ({ routes, wide }) =>
+    Object.values(routes).map(({ route, label }) => (
+      <Link to={route} label={label} key={route}>
+        <LinkVariant label={label} wide={wide} />
+      </Link>
+    ));
+
+  const LinkVariant = ({ label, wide }) => {
+    if (wide)
+      return (
+        <Button
+          onClick={handleCloseNavMenu}
+          sx={{ my: 2, color: "white", display: "block" }}
+          key={label}
+        >
+          {label}
+        </Button>
+      );
+    else
+      return (
+        <MenuItem onClick={handleCloseNavMenu}>
+          <Typography textAlign="center">{label}</Typography>
+        </MenuItem>
+      );
   };
 
   return (
@@ -65,7 +76,7 @@ export function Navigation({ routes }) {
               textDecoration: "none",
             }}
           >
-            {siteName}
+            {strings.siteName}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -96,15 +107,7 @@ export function Navigation({ routes }) {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {Object.values(routes).map(({ route, label }) => (
-                // TODO 1 fix styling as it's lost now
-                // TODO 2 extract route mapping to a function
-                <Link to={route} key={label}>
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{label}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
+              <RouteItems routes={routes} wide={false} />
             </Menu>
           </Box>
 
@@ -128,21 +131,10 @@ export function Navigation({ routes }) {
               textDecoration: "none",
             }}
           >
-            {siteName}
+            {strings.siteName}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {Object.values(routes).map(({ route, label }) => (
-              // TODO 2 extract route mapping to a function
-              <Link to={route} key={label}>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                  key={label}
-                >
-                  {label}
-                </Button>
-              </Link>
-            ))}
+            <RouteItems routes={routes} wide={true} />
           </Box>
           <Info />
         </Toolbar>
@@ -153,44 +145,43 @@ export function Navigation({ routes }) {
 
 const Info = () => {
   const [showInfo, setShowInfo] = useState(false);
-
   return (
     <div>
-      <button
+      <InfoIcon
         onClick={() => {
           setShowInfo(true);
         }}
-      >
-        I
-      </button>
-      {showInfo && (
-       <Modal setShowInfo={setShowInfo} />
-      )}
+      />
+      {showInfo && <Modal setShowInfo={setShowInfo} />}
     </div>
   );
 };
 
-const Modal = ({setShowInfo}) => {
+const Modal = ({ setShowInfo }) => {
   return (
-     <Box
-          sx={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            width: "50%",
-            height: "50%",
-            background: "red",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          Info{" "}
-          <button
-            onClick={() => {
-              setShowInfo(false);
-            }}
-          >
-            Close
-          </button>
-        </Box>
-  )
-}
+    <Box
+      sx={{
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        width: "50%",
+        height: "50%",
+        background: "gray",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      {strings.loremIpsum}
+      <CloseIcon
+        onClick={() => {
+          setShowInfo(false);
+        }}
+        sx={{
+          position: "fixed",
+          top: "0%",
+          left: "100%",
+          transform: "translate(-99%, -1%)",
+        }}
+      />
+    </Box>
+  );
+};

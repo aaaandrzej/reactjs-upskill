@@ -1,11 +1,8 @@
-import { rows } from "../InvoiceList/mockedData";
+import { useParams } from "react-router-dom";
+import { rows } from "../mockedData";
+import InvoiceForm from "../InvoiceForm";
 
-export default function InvoiceDetails() {
-  // TODO in progress, helper function to view single invoice
-  // let params = useParams();
-  // let id = params.id
-
-  //   console.log(rows[id])
-  //   return rows[id]
-  return rows;
+export default function EditInvoice() {
+  const params = useParams();
+  return InvoiceForm(rows[params.invoiceId - 1]);
 }
