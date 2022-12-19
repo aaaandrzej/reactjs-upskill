@@ -10,7 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
-import { rows } from "../mockedData";
+import mockedData from "../../mockedData.json";
 
 export default function InvoiceList() {
   return (
@@ -27,24 +27,28 @@ export default function InvoiceList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {Object.keys(mockedData).map((key) => (
             <TableRow
-              key={row.no}
+              key={mockedData[key]}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <Link to={"/invoice/" + row.no}>{row.no}</Link>
+                <Link to={"/invoice/" + key}>{key}</Link>
               </TableCell>
-              <TableCell align="right">{row.date.toDateString()}</TableCell>
-              <TableCell align="right">{row.recipentName}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-              <TableCell align="right">{row.paid}</TableCell>
+              <TableCell align="right">{mockedData[key].date}</TableCell>
               <TableCell align="right">
-                {/* TODO redirect actions properly */}
-                <Link to={"/invoice/" + row.no}>
+                {mockedData[key].recipentName}
+              </TableCell>
+              <TableCell align="right">{mockedData[key].amount}</TableCell>
+              <TableCell align="right">
+                {mockedData[key].isPaid === "true" ? "yes" : "no"}
+              </TableCell>
+              <TableCell align="right">
+                <Link to={"/invoice/" + key}>
                   <EditIcon />
                 </Link>
                 <Link>
+                  {/* TODO redirect delete action properly */}
                   <DeleteIcon />
                 </Link>
               </TableCell>

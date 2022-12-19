@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { rows } from "../mockedData";
+import mockedData from "../../mockedData.json";
+
 import InvoiceForm from "../InvoiceForm";
 
 export default function EditInvoice() {
   const params = useParams();
-  return InvoiceForm(rows[params.invoiceId - 1]);
+  return InvoiceForm(params.invoiceId, mockedData[params.invoiceId]);
 }

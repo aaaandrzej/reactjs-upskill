@@ -1,7 +1,10 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 
-export default function InvoiceForm(preDefinedFields = undefined) {
+export default function InvoiceForm(
+  preDefinedId = undefined,
+  preDefinedFields = undefined
+) {
   const { register, handleSubmit } = useForm();
 
   // TODO convert this to saving object instead of just logging input data
@@ -18,7 +21,7 @@ export default function InvoiceForm(preDefinedFields = undefined) {
         <label>No</label>
         <input
           type="number"
-          {...register("no", { required: true, value: preDefinedFields.no })}
+          {...register("no", { required: true, value: preDefinedId })}
         />
       </div>
       <div>
@@ -72,7 +75,11 @@ export default function InvoiceForm(preDefinedFields = undefined) {
       </div>
       <div>
         <label>Paid</label>
-        <select {...register("isPaid", { value: preDefinedFields.isPaid })}>
+        <select
+          {...register("isPaid", {
+            value: preDefinedFields.isPaid === "true" ? true : false,
+          })}
+        >
           <option value={true}>yes</option>
           <option value={false}>no</option>
         </select>
