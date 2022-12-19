@@ -10,9 +10,9 @@ export default function InvoiceForm(
   // TODO convert this to saving object instead of just logging input data
   const onSubmit = (data) =>
     console.log(
-      "Invoice data: " + data.date.toDateString(),
-      "Invoice amount: " + data.amount,
-      "Paid: " + data.isPaid
+      `Invoice date: ${data.date.toDateString()}`,
+      `Invoice amount: ${data.amount}`,
+      `Paid: ${data.isPaid ? "yes" : "no"}`
     );
 
   return (
