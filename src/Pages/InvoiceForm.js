@@ -21,7 +21,7 @@ export default function InvoiceForm(
         <label>No</label>
         <input
           type="number"
-          {...register("no", { required: true, value: preDefinedId })}
+          {...register("invoiceId", { required: true, value: preDefinedId })}
         />
       </div>
       <div>
