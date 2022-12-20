@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -27,33 +27,31 @@ export default function InvoiceList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.keys(mockedData).map((key) => (
-            <TableRow
-              key={mockedData[key]}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                <Link to={"/invoice/" + key}>{key}</Link>
-              </TableCell>
-              <TableCell align="right">{mockedData[key].date}</TableCell>
-              <TableCell align="right">
-                {mockedData[key].recipentName}
-              </TableCell>
-              <TableCell align="right">{mockedData[key].amount}</TableCell>
-              <TableCell align="right">
-                {mockedData[key].isPaid === "true" ? "yes" : "no"}
-              </TableCell>
-              <TableCell align="right">
-                <Link to={"/invoice/" + key}>
-                  <EditIcon />
-                </Link>
-                <Link>
-                  {/* TODO redirect delete action properly */}
-                  <DeleteIcon />
-                </Link>
-              </TableCell>
-            </TableRow>
-          ))}
+          {Object.values(mockedData).map(
+            ({ id, date, amount, recipentName, isPaid }) => (
+              <TableRow
+                key={id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <Link to={"/invoice/" + id}>{id}</Link>
+                </TableCell>
+                <TableCell align="right">{date}</TableCell>
+                <TableCell align="right">{recipentName}</TableCell>
+                <TableCell align="right">{amount}</TableCell>
+                <TableCell align="right">{isPaid ? "yes" : "no"}</TableCell>
+                <TableCell align="right">
+                  <Link to={"/invoice/" + id}>
+                    <EditIcon />
+                  </Link>
+                  <Link>
+                    {/* TODO redirect delete action properly */}
+                    <DeleteIcon />
+                  </Link>
+                </TableCell>
+              </TableRow>
+            )
+          )}
         </TableBody>
       </Table>
     </TableContainer>

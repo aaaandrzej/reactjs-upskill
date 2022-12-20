@@ -1,32 +1,37 @@
-{
-  "1": {
+[
+  {
+    "id": "1",
     "date": "Fri, 01 Jan 1971 00:00:00 GMT",
     "recipentName": "Jerry",
     "amount": "24",
-    "isPaid": "true"
+    "isPaid": true
   },
-  "2": {
+  {
+    "id": "2",
     "date": "Sat, 02 Jan 1971 00:00:00 GMT",
     "recipentName": "Merry",
     "amount": "4",
-    "isPaid": "true"
+    "isPaid": true
   },
-  "3": {
+  {
+    "id": "3",
     "date": "Sun, 03 Jan 1971 00:00:00 GMT",
     "recipentName": "Berry",
     "amount": "124",
-    "isPaid": "false"
+    "isPaid": false
   },
-  "4": {
+  {
+    "id": "4",
     "date": "Mon, 04 Jan 1971 00:00:00 GMT",
     "recipentName": "Gerry",
     "amount": "234",
-    "isPaid": "true"
+    "isPaid": true
   },
-  "5": {
+  {
+    "id": "5",
     "date": "Tue, 05 Jan 1971 00:00:00 GMT",
     "recipentName": "Derry",
     "amount": "524",
-    "isPaid": "false"
+    "isPaid": false
   }
-}
+]

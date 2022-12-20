@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -11,10 +11,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import InfoIcon from "@mui/icons-material/Info";
-import CloseIcon from "@mui/icons-material/Close";
 
 import strings from "../../strings.json";
+import { Info } from "./Info";
 
 export function Navigation({ routes }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -142,46 +141,3 @@ export function Navigation({ routes }) {
     </AppBar>
   );
 }
-
-const Info = () => {
-  const [showInfo, setShowInfo] = useState(false);
-  return (
-    <div>
-      <InfoIcon
-        onClick={() => {
-          setShowInfo(true);
-        }}
-      />
-      {showInfo && <Modal setShowInfo={setShowInfo} />}
-    </div>
-  );
-};
-
-const Modal = ({ setShowInfo }) => {
-  return (
-    <Box
-      sx={{
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        width: "50%",
-        height: "50%",
-        background: "gray",
-        transform: "translate(-50%, -50%)",
-      }}
-    >
-      {strings.loremIpsum}
-      <CloseIcon
-        onClick={() => {
-          setShowInfo(false);
-        }}
-        sx={{
-          position: "fixed",
-          top: "0%",
-          left: "100%",
-          transform: "translate(-99%, -1%)",
-        }}
-      />
-    </Box>
-  );
-};
