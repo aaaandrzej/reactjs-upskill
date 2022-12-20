@@ -2,8 +2,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 
 export default function InvoiceForm(
-  preDefinedId = undefined,
-  preDefinedFields = undefined
+  {preDefinedId,  preDefinedFields} 
 ) {
   const { register, handleSubmit } = useForm();
 

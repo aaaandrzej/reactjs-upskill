@@ -1,5 +1,5 @@
 import InvoiceForm from "../InvoiceForm";
 
-export default function AddNewInvoice() {
-  return InvoiceForm();
-}
+const AddNewInvoice = () =>  <InvoiceForm />
+
+export default AddNewInvoice
