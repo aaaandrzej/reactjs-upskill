@@ -53,7 +53,7 @@ export function Navigation({ routes }) {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="flexappbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Narrow view */}

@@ -1,5 +1,9 @@
 import React from "react";
 
 export default function NotFound() {
-  return <div>Something is not yes, try again</div>;
+  return (
+    <div className="flexbox">
+      <p>Something is not yes, try again</p>
+    </div>
+  );
 }
