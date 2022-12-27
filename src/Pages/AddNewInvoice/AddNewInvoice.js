@@ -1,7 +1,7 @@
 import React from "react";
 import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
 
-const emptyInvoice = {
+export const emptyInvoice = {
   id: "",
   amount: "",
   recipentName: "",

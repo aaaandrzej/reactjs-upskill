@@ -10,9 +10,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
-import invoiceData from "../../invoiceData.json";
+import invoices from "../../invoiceData.json";
 
 export default function InvoiceList() {
+  const invoiceData = [...invoices["invoices"]];
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
