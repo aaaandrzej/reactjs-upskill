@@ -1,5 +1,6 @@
-import * as React from "react";
+import React from "react";
+import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
 
-export default function AddNewInvoiceForm() {
-  return <h2>Placeholder for adding a new invoice</h2>;
-}
+const AddNewInvoice = () => <InvoiceForm />;
+
+export default AddNewInvoice;

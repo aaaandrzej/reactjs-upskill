@@ -1,1 +1,4 @@
-{ "add": "/create", "list": "/" }
+{
+  "list": { "route": "/", "label": "Invoices" },
+  "add": { "route": "/create", "label": "Add new invoice" }
+}
