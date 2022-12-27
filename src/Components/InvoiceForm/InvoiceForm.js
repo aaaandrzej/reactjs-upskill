@@ -8,14 +8,14 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import mockedData from "../../mockedData.json";
+import invoiceData from "../../invoiceData.json";
 
 export default function InvoiceForm() {
   const { invoiceId } = useParams();
 
   // TODO move this logic level above
   const preDefinedFields = invoiceId
-    ? mockedData.filter((item) => item.id === invoiceId)[0]
+    ? invoiceData.filter((item) => item.id === invoiceId)[0]
     : undefined;
 
   // TODO store dates as objects instead of strings

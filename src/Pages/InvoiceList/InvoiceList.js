@@ -10,7 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
-import mockedData from "../../mockedData.json";
+import invoiceData from "../../invoiceData.json";
 
 export default function InvoiceList() {
   return (
@@ -27,7 +27,7 @@ export default function InvoiceList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.values(mockedData).map(
+          {Object.values(invoiceData).map(
             ({ id, date, amount, recipentName, isPaid }) => (
               <TableRow
                 key={id}
