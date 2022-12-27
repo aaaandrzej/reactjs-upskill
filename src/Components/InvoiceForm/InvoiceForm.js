@@ -1,6 +1,6 @@
 import { Box, TextField, Checkbox, Button } from "@mui/material";
 import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -13,13 +13,15 @@ import mockedData from "../../mockedData.json";
 export default function InvoiceForm() {
   const { invoiceId } = useParams();
 
+  // TODO move this logic level above
   const preDefinedFields = invoiceId
     ? mockedData.filter((item) => item.id === invoiceId)[0]
     : undefined;
 
+  // TODO store dates as objects instead of strings
   const [date, setDate] = useState(preDefinedFields?.date || "");
 
-  const { control, handleSubmit, register, setValue } = useForm({
+  const { handleSubmit, register, setValue } = useForm({
     defaultValues: {
       id: preDefinedFields?.id || "",
       amount: preDefinedFields?.amount || "",
@@ -27,16 +29,15 @@ export default function InvoiceForm() {
       recipentAddress: preDefinedFields?.recipentAddress || "",
       senderName: preDefinedFields?.senderName || "",
       senderAddress: preDefinedFields?.senderAddress || "",
-      date: date
+      date: date,
+      isPaid: preDefinedFields?.isPaid || false,
     },
   });
 
   // TODO convert this to saving object instead of just logging input data
   const onSubmit = (data) => {
-    // TODO probably such manipulations should happen within the field and not on submit...
     console.log({
       ...data,
-      date: data?.date?._d ? data.date._d.toString() : data.date || "",
     });
   };
 
@@ -61,35 +62,13 @@ export default function InvoiceForm() {
             id="standard-basic"
             variant="standard"
           />
-          {/* <Controller
-            name="date"
-            defaultValue={date}
-            control={control}
-            render={({ field: { onChange, ...restField } }) => (
-              <DatePicker
-                label="Date"
-                onChange={(event) => {
-                  onChange(event);
-                  setDate(event);
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    id="standard-basic"
-                    variant="standard"
-                  />
-                )}
-                {...restField}
-              />
-            )}
-          /> */}
-          {/* convert this to sth like: */}
           <DatePicker
             {...register("date")}
             label="Date"
+            value={date}
             onChange={(newValue) => {
-              setValue('date', newValue);
-              setDate(newValue);
+              setValue("date", newValue._d);
+              setDate(newValue._d);
             }}
             renderInput={(params) => (
               <TextField {...params} id="standard-basic" variant="standard" />
@@ -133,18 +112,9 @@ export default function InvoiceForm() {
 
           <div>
             Paid
-            <Controller
-              name="isPaid"
-              // this is probably very bad but it finally works
-              defaultValue={Boolean(preDefinedFields?.isPaid)}
-              control={control}
-              render={({ field: props }) => (
-                <Checkbox
-                  {...props}
-                  onChange={(e) => props.onChange(Boolean(e.target.checked))}
-                  defaultChecked={Boolean(preDefinedFields?.isPaid)}
-                />
-              )}
+            <Checkbox
+              {...register("isPaid")}
+              defaultChecked={Boolean(preDefinedFields?.isPaid)}
             />
           </div>
           <ThemeProvider theme={theme}>
