@@ -1,36 +1,26 @@
 import { Box, TextField, Checkbox, Button } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import invoiceData from "../../invoiceData.json";
-
-export default function InvoiceForm() {
-  const { invoiceId } = useParams();
-
-  // TODO move this logic level above
-  const preDefinedFields = invoiceId
-    ? invoiceData.filter((item) => item.id === invoiceId)[0]
-    : undefined;
-
+export default function InvoiceForm({ predefinedFields }) {
   // TODO store dates as objects instead of strings
-  const [date, setDate] = useState(preDefinedFields?.date || "");
+  const [date, setDate] = useState(predefinedFields.date);
 
   const { handleSubmit, register, setValue } = useForm({
     defaultValues: {
-      id: preDefinedFields?.id || "",
-      amount: preDefinedFields?.amount || "",
-      recipentName: preDefinedFields?.recipentName || "",
-      recipentAddress: preDefinedFields?.recipentAddress || "",
-      senderName: preDefinedFields?.senderName || "",
-      senderAddress: preDefinedFields?.senderAddress || "",
+      id: predefinedFields.id,
+      amount: predefinedFields.amount,
+      recipentName: predefinedFields.recipentName,
+      recipentAddress: predefinedFields.recipentAddress,
+      senderName: predefinedFields.senderName,
+      senderAddress: predefinedFields.senderAddress,
       date: date,
-      isPaid: preDefinedFields?.isPaid || false,
+      isPaid: predefinedFields.isPaid,
     },
   });
 
@@ -114,7 +104,7 @@ export default function InvoiceForm() {
             Paid
             <Checkbox
               {...register("isPaid")}
-              defaultChecked={Boolean(preDefinedFields?.isPaid)}
+              defaultChecked={predefinedFields.isPaid}
             />
           </div>
           <ThemeProvider theme={theme}>
