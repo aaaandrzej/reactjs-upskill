@@ -2,18 +2,14 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
-import invoices from "../../invoiceData.json";
-import emptyInvoice from "../AddNewInvoice/AddNewInvoice";
+
+import { useGetInvoices } from "../../Pages/InvoiceList/InvoiceList";
 
 export default function EditInvoice() {
-  const invoiceData = [...invoices["invoices"]];
-
   const { invoiceId } = useParams();
+  const { data: invoiceData } = useGetInvoices(invoiceId);
 
-  const predefinedFields =
-    invoiceId in invoiceData.map((item) => item.id)
-      ? invoiceData.filter((item) => item.id === invoiceId)[0]
-      : emptyInvoice;
-
-  return <InvoiceForm predefinedFields={predefinedFields} />;
+  if (invoiceData?.id > 0)
+    return <InvoiceForm predefinedFields={invoiceData} />;
+  else return <div>Not yet</div>;
 }

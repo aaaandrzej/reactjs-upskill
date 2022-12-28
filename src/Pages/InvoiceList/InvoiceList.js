@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
-const useGetInvoices = (id = "") => {
+export const useGetInvoices = (id = "") => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
