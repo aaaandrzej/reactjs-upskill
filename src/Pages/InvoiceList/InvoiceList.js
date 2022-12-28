@@ -25,11 +25,11 @@ const useGetInvoices = (id = "") => {
     });
   };
 
-  return data;
+  return { data };
 };
 
 export default function InvoiceList() {
-  const invoiceData = useGetInvoices("");
+  const { data: invoiceData } = useGetInvoices("");
 
   if (invoiceData.length === 0) {
     return <div>Not yet</div>;
