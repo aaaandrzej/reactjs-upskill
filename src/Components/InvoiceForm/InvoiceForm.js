@@ -7,6 +7,8 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
+import { useHandleInvoice } from "../../Pages/InvoiceList/InvoiceList";
+
 export default function InvoiceForm({ predefinedFields }) {
   // TODO store dates as objects instead of strings
   const [date, setDate] = useState(predefinedFields.date);
@@ -23,12 +25,11 @@ export default function InvoiceForm({ predefinedFields }) {
       isPaid: predefinedFields.isPaid,
     },
   });
+  const { handlePostRequest } = useHandleInvoice();
 
-  // TODO convert this to saving object instead of just logging input data
   const onSubmit = (data) => {
-    console.log({
-      ...data,
-    });
+    // TODO handle issue when id is the same -> maybe use put instead
+    handlePostRequest(data);
   };
 
   const theme = createTheme({

@@ -31,8 +31,25 @@ export const useGetInvoices = (id = "") => {
       .catch((error) => setError(error))
       .finally(setIsLoading(false));
   };
-
   return { data, isLoading, error };
+};
+
+export const useHandleInvoice = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const handlePostRequest = (post_data) => {
+    axios
+      .post(`http://localhost:3001/invoices/`, post_data)
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((error) => setError(error))
+      .finally(setIsLoading(false));
+  };
+  // TODO expose also methods to add/ delete invoices
+  return { data, isLoading, error, handlePostRequest };
 };
 
 export default function InvoiceList() {
