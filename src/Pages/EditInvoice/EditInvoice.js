@@ -7,9 +7,10 @@ import { useGetInvoices } from "../../Pages/InvoiceList/InvoiceList";
 
 export default function EditInvoice() {
   const { invoiceId } = useParams();
-  const { data: invoiceData } = useGetInvoices(invoiceId);
+  const { data: invoiceData, isLoading, error } = useGetInvoices(invoiceId);
 
-  if (invoiceData?.id > 0)
-    return <InvoiceForm predefinedFields={invoiceData} />;
-  else return <div>Not yet</div>;
+  if (isLoading) return <div>Not yet</div>;
+  else if (error?.code === "ERR_BAD_REQUEST")
+    return <div>Wrong ID or API error</div>;
+  else return <InvoiceForm predefinedFields={invoiceData} />;
 }

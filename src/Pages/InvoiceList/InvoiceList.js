@@ -12,26 +12,33 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
+// TODO probably move it somewhere else..
 export const useGetInvoices = (id = "") => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     pullInvoicesfromApi();
   }, []);
 
   const pullInvoicesfromApi = () => {
-    axios.get(`http://localhost:3001/invoices/${id}`).then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get(`http://localhost:3001/invoices/${id}`)
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((error) => setError(error))
+      .finally(setIsLoading(false));
   };
 
-  return { data };
+  return { data, isLoading, error };
 };
 
 export default function InvoiceList() {
-  const { data: invoiceData } = useGetInvoices("");
+  const { data: invoiceData, isLoading } = useGetInvoices("");
 
-  if (invoiceData.length === 0) {
+  if (isLoading) {
     return <div>Not yet</div>;
   } else {
     return (
