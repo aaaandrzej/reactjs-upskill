@@ -105,7 +105,7 @@ export default function InvoiceForm({ predefinedFields }) {
             Paid
             <Checkbox
               {...register("isPaid")}
-              defaultChecked={predefinedFields.isPaid}
+              checked={predefinedFields.isPaid || false}
             />
           </div>
           <ThemeProvider theme={theme}>

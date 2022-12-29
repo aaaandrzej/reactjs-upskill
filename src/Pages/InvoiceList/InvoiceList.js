@@ -29,7 +29,7 @@ export const useGetInvoices = (id = "") => {
         setData(res.data);
       })
       .catch((error) => setError(error))
-      .finally(setIsLoading(false));
+      .finally(()=> setIsLoading(false));
   };
   return { data, isLoading, error };
 };
