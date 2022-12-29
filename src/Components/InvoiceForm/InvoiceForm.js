@@ -7,7 +7,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import { useHandleInvoice } from "../../Pages/InvoiceList/InvoiceList";
+import { useHandleInvoices } from "../../Pages/InvoiceList/InvoiceList";
 
 export default function InvoiceForm({ predefinedFields }) {
   // TODO store dates as objects instead of strings
@@ -25,11 +25,15 @@ export default function InvoiceForm({ predefinedFields }) {
       isPaid: predefinedFields.isPaid,
     },
   });
-  const { handlePostRequest } = useHandleInvoice();
+  const { response: invoicesList, handleApiRequest } = useHandleInvoices();
+
+  const invoiceIds =
+    invoicesList.length > 0 ? invoicesList.map((invoice) => invoice.id) : [];
 
   const onSubmit = (data) => {
-    // TODO handle issue when id is the same -> maybe use put instead
-    handlePostRequest(data);
+    const method = data?.id in invoiceIds ? "put" : "post";
+    handleApiRequest(method, data);
+    // TODO fix issue when submit is clicked multiple times
   };
 
   const theme = createTheme({
@@ -105,7 +109,7 @@ export default function InvoiceForm({ predefinedFields }) {
             Paid
             <Checkbox
               {...register("isPaid")}
-              checked={predefinedFields.isPaid || false}
+              defaultChecked={predefinedFields.isPaid}
             />
           </div>
           <ThemeProvider theme={theme}>

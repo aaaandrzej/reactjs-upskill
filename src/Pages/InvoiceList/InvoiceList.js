@@ -13,47 +13,33 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 // TODO probably move it somewhere else..
-export const useGetInvoices = (id = "") => {
-  const [data, setData] = useState([]);
+export const useHandleInvoices = (id = "") => {
+  const apiClient = axios.create({
+    baseURL: "http://localhost:3001/invoices/",
+  });
+  const [response, setResponse] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    pullInvoicesfromApi();
+    handleApiRequest("get", { id });
   }, []);
 
-  const pullInvoicesfromApi = () => {
-    axios
-      .get(`http://localhost:3001/invoices/${id}`)
+  const handleApiRequest = (method, data) => {
+    const id = method.toLowerCase() === "post" || !data?.id ? "" : data?.id;
+    apiClient[method](id, data)
       .then((res) => {
-        setData(res.data);
+        setResponse(res.data);
       })
       .catch((error) => setError(error))
-      .finally(()=> setIsLoading(false));
+      .finally(() => setIsLoading(false));
   };
-  return { data, isLoading, error };
-};
 
-export const useHandleInvoice = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const handlePostRequest = (post_data) => {
-    axios
-      .post(`http://localhost:3001/invoices/`, post_data)
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((error) => setError(error))
-      .finally(setIsLoading(false));
-  };
-  // TODO expose also methods to add/ delete invoices
-  return { data, isLoading, error, handlePostRequest };
+  return { response, isLoading, error, handleApiRequest };
 };
 
 export default function InvoiceList() {
-  const { data: invoiceData, isLoading } = useGetInvoices("");
+  const { response: invoiceData, isLoading } = useHandleInvoices("");
 
   if (isLoading) {
     return <div>Not yet</div>;
