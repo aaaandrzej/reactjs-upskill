@@ -39,7 +39,11 @@ export const useHandleInvoices = (id = "") => {
 };
 
 export default function InvoiceList() {
-  const { response: invoiceData, isLoading } = useHandleInvoices("");
+  const {
+    response: invoiceData,
+    isLoading,
+    handleApiRequest,
+  } = useHandleInvoices("");
 
   if (isLoading) {
     return <div>Not yet</div>;
@@ -75,8 +79,12 @@ export default function InvoiceList() {
                     <Link to={"/invoice/" + id}>
                       <EditIcon />
                     </Link>
-                    <Link>
-                      {/* TODO redirect delete action properly */}
+                    <Link
+                      onClick={() => {
+                        handleApiRequest("delete", { id });
+                        window.location.reload();
+                      }}
+                    >
                       <DeleteIcon />
                     </Link>
                   </TableCell>
