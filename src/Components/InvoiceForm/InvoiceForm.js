@@ -52,7 +52,9 @@ export default function InvoiceForm({ predefinedFields }) {
           sx={{ margin: 1, display: "inline-flex", flexDirection: "column" }}
         >
           <TextField
-            {...register("id")}
+            {...register("id", { required: true })}
+            required
+            type="number"
             label="No"
             id="standard-basic"
             variant="standard"
