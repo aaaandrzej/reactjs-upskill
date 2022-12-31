@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,32 +10,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
-import axios from "axios";
 import moment from "moment";
-
-// TODO probably move it somewhere else..
-export const useHandleInvoices = (id = "") => {
-  const apiClient = axios.create({
-    baseURL: "http://localhost:3001/invoices/",
-  });
-  const [response, setResponse] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    handleApiRequest("get", id, {});
-  }, []);
-
-  const handleApiRequest = (method, id, data) => {
-    apiClient[method](String(id), data)
-      .then((res) => {
-        setResponse(res.data);
-      })
-      .catch((error) => setError(error))
-      .finally(() => setIsLoading(false));
-  };
-  return { response, isLoading, error, handleApiRequest };
-};
+import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
 
 export default function InvoiceList() {
   const {

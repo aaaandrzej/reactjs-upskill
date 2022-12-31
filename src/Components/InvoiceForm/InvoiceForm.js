@@ -7,7 +7,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import { useHandleInvoices } from "../../Pages/InvoiceList/InvoiceList";
+import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
 
 export default function InvoiceForm({ predefinedFields }) {
   const [date, setDate] = useState(predefinedFields.date);

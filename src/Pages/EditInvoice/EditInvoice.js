@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
 
-import { useHandleInvoices } from "../../Pages/InvoiceList/InvoiceList";
+import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
 
 export default function EditInvoice() {
   const { invoiceId } = useParams();

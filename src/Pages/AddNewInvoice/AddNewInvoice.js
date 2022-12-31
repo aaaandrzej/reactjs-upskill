@@ -1,7 +1,7 @@
 import React from "react";
 import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
 
-import { useHandleInvoices } from "../InvoiceList/InvoiceList";
+import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
 
 export const emptyInvoice = {
   id: null,
