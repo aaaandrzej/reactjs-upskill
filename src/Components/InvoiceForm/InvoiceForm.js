@@ -24,7 +24,11 @@ export default function InvoiceForm({ predefinedFields }) {
       isPaid: predefinedFields.isPaid,
     },
   });
-  const { response: invoicesList, handleApiRequest } = useHandleInvoices();
+  const {
+    response: invoicesList,
+    isLoading,
+    handleApiRequest,
+  } = useHandleInvoices();
 
   const invoiceIds =
     invoicesList.length > 0 ? invoicesList.map((invoice) => invoice.id) : [];
@@ -32,8 +36,10 @@ export default function InvoiceForm({ predefinedFields }) {
   const onSubmit = (data) => {
     const method = data?.id in invoiceIds ? "put" : "post";
     const id = method.toLowerCase() === "post" ? "" : data?.id;
-    handleApiRequest(method, id, data);
-    // TODO fix issue when submit is clicked multiple times
+    if (!isLoading) {
+      handleApiRequest(method, id, data);
+      window.location = "/";
+    }
   };
 
   const theme = createTheme({
@@ -45,7 +51,9 @@ export default function InvoiceForm({ predefinedFields }) {
     },
   });
 
-  return (
+  return isLoading ? (
+    <div>Not yet</div>
+  ) : (
     <form onSubmit={handleSubmit(onSubmit)}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <Box
@@ -117,12 +125,7 @@ export default function InvoiceForm({ predefinedFields }) {
             />
           </div>
           <ThemeProvider theme={theme}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="neutral"
-              onClick={() => (window.location = "/")}
-            >
+            <Button type="submit" variant="contained" color="neutral">
               Submit
             </Button>
           </ThemeProvider>
