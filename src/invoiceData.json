@@ -1,38 +1,101 @@
 {
   "invoices": [
     {
-      "id": "1",
-      "date": "Fri, 01 Jan 1971 00:00:00 GMT",
+      "id": 1,
+      "amount": 242,
       "recipentName": "Jerry",
-      "amount": "24",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "Fri, 01 Jan 1971 00:00:00 GMT",
       "isPaid": true
     },
     {
-      "id": "2",
+      "id": 2,
       "date": "Sat, 02 Jan 1971 00:00:00 GMT",
       "recipentName": "Merry",
-      "amount": "4",
+      "amount": 4,
       "isPaid": true
     },
     {
-      "id": "3",
+      "id": 3,
       "date": "Sun, 03 Jan 1971 00:00:00 GMT",
       "recipentName": "Berry",
-      "amount": "124",
+      "amount": 124,
       "isPaid": false
     },
     {
-      "id": "4",
+      "id": 4,
       "date": "Mon, 04 Jan 1971 00:00:00 GMT",
       "recipentName": "Gerry",
-      "amount": "234",
+      "amount": 234,
       "isPaid": true
     },
     {
-      "id": "5",
+      "id": 5,
       "date": "Tue, 05 Jan 1971 00:00:00 GMT",
       "recipentName": "Derry",
-      "amount": "524",
+      "amount": 524,
+      "isPaid": false
+    },
+    {
+      "id": 6,
+      "amount": null,
+      "recipentName": "",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "2022-12-30T16:35:13.082Z",
+      "isPaid": true
+    },
+    {
+      "id": 7,
+      "amount": 12,
+      "recipentName": "sdaas",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "2022-12-30T16:43:24.407Z",
+      "isPaid": false
+    },
+    {
+      "id": 8,
+      "amount": 667,
+      "recipentName": "",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "2022-12-30T21:55:59.698Z",
+      "isPaid": true
+    },
+    {
+      "id": 9,
+      "amount": 1,
+      "recipentName": "",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "2022-12-30T21:57:31.270Z",
+      "isPaid": false
+    },
+    {
+      "id": 11,
+      "amount": 0,
+      "recipentName": "",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "2022-12-30T22:08:10.657Z",
+      "isPaid": true
+    },
+    {
+      "id": 12,
+      "amount": 12,
+      "recipentName": "",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "2022-12-31T15:38:19.847Z",
       "isPaid": false
     }
   ]

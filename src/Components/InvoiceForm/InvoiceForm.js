@@ -10,7 +10,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useHandleInvoices } from "../../Pages/InvoiceList/InvoiceList";
 
 export default function InvoiceForm({ predefinedFields }) {
-  // TODO store dates as objects instead of strings
   const [date, setDate] = useState(predefinedFields.date);
 
   const { handleSubmit, register, setValue } = useForm({
@@ -32,7 +31,8 @@ export default function InvoiceForm({ predefinedFields }) {
 
   const onSubmit = (data) => {
     const method = data?.id in invoiceIds ? "put" : "post";
-    handleApiRequest(method, data);
+    const id = method.toLowerCase() === "post" ? "" : data?.id;
+    handleApiRequest(method, id, data);
     // TODO fix issue when submit is clicked multiple times
   };
 
@@ -52,7 +52,7 @@ export default function InvoiceForm({ predefinedFields }) {
           sx={{ margin: 1, display: "inline-flex", flexDirection: "column" }}
         >
           <TextField
-            {...register("id", { required: true })}
+            {...register("id", { required: true, valueAsNumber: true })}
             required
             type="number"
             label="No"
@@ -73,7 +73,9 @@ export default function InvoiceForm({ predefinedFields }) {
           />
 
           <TextField
-            {...register("amount")}
+            {...register("amount", { valueAsNumber: true })}
+            type="number"
+            inputProps={{ step: "0.01" }}
             label="Amount"
             id="standard-basic"
             variant="standard"
@@ -115,7 +117,12 @@ export default function InvoiceForm({ predefinedFields }) {
             />
           </div>
           <ThemeProvider theme={theme}>
-            <Button type="submit" variant="contained" color="neutral">
+            <Button
+              type="submit"
+              variant="contained"
+              color="neutral"
+              onClick={() => (window.location = "/")}
+            >
               Submit
             </Button>
           </ThemeProvider>

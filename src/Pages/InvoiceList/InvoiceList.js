@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
+import moment from "moment";
 
 // TODO probably move it somewhere else..
 export const useHandleInvoices = (id = "") => {
@@ -22,19 +23,17 @@ export const useHandleInvoices = (id = "") => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    handleApiRequest("get", { id });
+    handleApiRequest("get", id, {});
   }, []);
 
-  const handleApiRequest = (method, data) => {
-    const id = method.toLowerCase() === "post" || !data?.id ? "" : data?.id;
-    apiClient[method](id, data)
+  const handleApiRequest = (method, id, data) => {
+    apiClient[method](String(id), data)
       .then((res) => {
         setResponse(res.data);
       })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
   };
-
   return { response, isLoading, error, handleApiRequest };
 };
 
@@ -71,7 +70,9 @@ export default function InvoiceList() {
                   <TableCell component="th" scope="row">
                     <Link to={"/invoice/" + id}>{id}</Link>
                   </TableCell>
-                  <TableCell align="right">{date}</TableCell>
+                  <TableCell align="right">
+                    {moment(date).format("D MMMM YYYY HH:MM")}
+                  </TableCell>
                   <TableCell align="right">{recipentName}</TableCell>
                   <TableCell align="right">{amount}</TableCell>
                   <TableCell align="right">{isPaid ? "yes" : "no"}</TableCell>
@@ -81,7 +82,7 @@ export default function InvoiceList() {
                     </Link>
                     <Link
                       onClick={() => {
-                        handleApiRequest("delete", { id });
+                        handleApiRequest("delete", Number(id), {});
                         window.location.reload();
                       }}
                     >

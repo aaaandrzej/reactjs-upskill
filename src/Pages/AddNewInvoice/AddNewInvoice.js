@@ -4,8 +4,8 @@ import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
 import { useHandleInvoices } from "../InvoiceList/InvoiceList";
 
 export const emptyInvoice = {
-  id: "",
-  amount: "",
+  id: null,
+  amount: 0,
   recipentName: "",
   recipentAddress: "",
   senderName: "",
