@@ -1,114 +1,81 @@
 {
   "invoices": [
     {
-      "id": 1,
+      "number": "1/2022",
       "amount": 2011.01,
       "recipentName": "Jerry",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
       "date": "1971-01-01T00:00:00.000Z",
-      "isPaid": true
+      "isPaid": true,
+      "id": 1
     },
     {
-      "id": 2,
+      "number": "2/2022",
       "amount": 4.01,
       "recipentName": "Merry",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
       "date": "1971-01-02T00:00:00.000Z",
-      "isPaid": true
+      "isPaid": true,
+      "id": 2
     },
     {
-      "id": 3,
+      "number": "3/2022",
       "amount": 124,
       "recipentName": "Berry",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
       "date": "1971-01-03T00:00:00.000Z",
-      "isPaid": true
+      "isPaid": true,
+      "id": 3
     },
     {
-      "id": 4,
+      "number": "4/2022",
       "amount": 234,
       "recipentName": "Gerry",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
       "date": "1971-01-04T00:00:00.000Z",
-      "isPaid": true
+      "isPaid": true,
+      "id": 4
     },
     {
-      "id": 5,
+      "number": "5/2022",
       "amount": 524,
       "recipentName": "Derry",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
       "date": "1971-01-05T00:00:00.000Z",
-      "isPaid": false
+      "isPaid": false,
+      "id": 5
     },
     {
-      "id": 6,
+      "number": "8/2022",
       "amount": 0,
       "recipentName": "",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
       "date": "2022-12-30T16:35:13.000Z",
-      "isPaid": true
+      "isPaid": true,
+      "id": 6
     },
     {
-      "id": 7,
-      "amount": 12,
-      "recipentName": "sdaas",
-      "recipentAddress": "",
-      "senderName": "",
-      "senderAddress": "",
-      "date": "2022-12-30T16:43:24.407Z",
-      "isPaid": false
-    },
-    {
-      "id": 8,
-      "amount": 667,
+      "number": "1/2023",
+      "amount": 123,
       "recipentName": "",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
-      "date": "2022-12-30T21:55:59.698Z",
-      "isPaid": true
-    },
-    {
-      "id": 9,
-      "amount": 1,
-      "recipentName": "",
-      "recipentAddress": "",
-      "senderName": "",
-      "senderAddress": "",
-      "date": "2022-12-30T21:57:31.270Z",
-      "isPaid": false
-    },
-    {
-      "id": 11,
-      "amount": 31,
-      "recipentName": "",
-      "recipentAddress": "",
-      "senderName": "",
-      "senderAddress": "",
-      "date": "2022-12-30T22:08:10.657Z",
-      "isPaid": true
-    },
-    {
-      "id": 12,
-      "amount": 12,
-      "recipentName": "",
-      "recipentAddress": "",
-      "senderName": "",
-      "senderAddress": "",
-      "date": "2022-12-31T15:38:19.847Z",
-      "isPaid": false
+      "date": "2023-01-02T15:39:19.094Z",
+      "isPaid": true,
+      "id": 7
     }
   ]
 }

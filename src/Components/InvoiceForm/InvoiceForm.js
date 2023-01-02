@@ -16,7 +16,7 @@ export default function InvoiceForm({ predefinedFields }) {
 
   const { handleSubmit, register, setValue } = useForm({
     defaultValues: {
-      id: predefinedFields.id,
+      number: predefinedFields.number,
       amount: predefinedFields.amount,
       recipentName: predefinedFields.recipentName,
       recipentAddress: predefinedFields.recipentAddress,
@@ -38,8 +38,8 @@ export default function InvoiceForm({ predefinedFields }) {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    const method = invoiceIds.includes(data.id) ? "put" : "post";
-    const id = method.toLowerCase() === "post" ? "" : data?.id;
+    const method = invoiceIds.includes(predefinedFields?.id) ? "put" : "post";
+    const id = method.toLowerCase() === "post" ? "" : predefinedFields?.id;
     if (!isLoading) {
       handleApiRequest(method, id, data);
       navigate("/");
@@ -64,9 +64,8 @@ export default function InvoiceForm({ predefinedFields }) {
           sx={{ margin: 1, display: "inline-flex", flexDirection: "column" }}
         >
           <TextField
-            {...register("id", { required: true, valueAsNumber: true })}
+            {...register("number")}
             required
-            type="number"
             label="No"
             id="standard-basic"
             variant="standard"

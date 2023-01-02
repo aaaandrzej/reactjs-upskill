@@ -14,7 +14,7 @@ import moment from "moment";
 import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
 
 export default function InvoiceList() {
-  const {
+  let {
     response: invoiceData,
     isLoading,
     handleApiRequest,
@@ -38,13 +38,13 @@ export default function InvoiceList() {
           </TableHead>
           <TableBody>
             {Object.values(invoiceData).map(
-              ({ id, date, amount, recipentName, isPaid }) => (
+              ({ id, number, date, amount, recipentName, isPaid }) => (
                 <TableRow
                   key={id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <Link to={"/invoice/" + id}>{id}</Link>
+                    <Link to={"/invoice/" + id}>{number}</Link>
                   </TableCell>
                   <TableCell align="right">
                     {moment(date).format("D MMMM YYYY HH:MM")}
@@ -58,8 +58,10 @@ export default function InvoiceList() {
                     </Link>
                     <Link
                       onClick={() => {
-                        handleApiRequest("delete", Number(id), {});
-                        window.location.reload();
+                        // TODO this needs further refactor after redesigning this hook
+                        handleApiRequest("delete", id, {}).then(
+                          ({ response: invoiceData } = useHandleInvoices(""))
+                        );
                       }}
                     >
                       <DeleteIcon />

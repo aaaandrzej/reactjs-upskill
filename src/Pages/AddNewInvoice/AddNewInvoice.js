@@ -1,11 +1,9 @@
 import React from "react";
 import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
 
-import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
-
 export const emptyInvoice = {
   id: null,
-  amount: 0,
+  amount: null,
   recipentName: "",
   recipentAddress: "",
   senderName: "",
@@ -14,18 +12,6 @@ export const emptyInvoice = {
   isPaid: false,
 };
 
-const AddNewInvoice = () => {
-  const { response: invoiceData, isLoading } = useHandleInvoices();
-
-  const newId =
-    Math.max(...(invoiceData.map((invoice) => Number(invoice.id)) || [0])) + 1;
-  const emptyInvoiceWithId = { ...emptyInvoice, id: newId };
-
-  return isLoading ? (
-    <div>Not yet</div>
-  ) : (
-    <InvoiceForm predefinedFields={emptyInvoiceWithId} />
-  );
-};
+const AddNewInvoice = () => <InvoiceForm predefinedFields={emptyInvoice} />;
 
 export default AddNewInvoice;
