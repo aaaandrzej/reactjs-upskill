@@ -2,50 +2,62 @@
   "invoices": [
     {
       "id": 1,
-      "amount": 242,
+      "amount": 2011.01,
       "recipentName": "Jerry",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
-      "date": "Fri, 01 Jan 1971 00:00:00 GMT",
+      "date": "1971-01-01T00:00:00.000Z",
       "isPaid": true
     },
     {
       "id": 2,
-      "date": "Sat, 02 Jan 1971 00:00:00 GMT",
+      "amount": 4.01,
       "recipentName": "Merry",
-      "amount": 4,
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-02T00:00:00.000Z",
       "isPaid": true
     },
     {
       "id": 3,
-      "date": "Sun, 03 Jan 1971 00:00:00 GMT",
-      "recipentName": "Berry",
       "amount": 124,
-      "isPaid": false
+      "recipentName": "Berry",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-03T00:00:00.000Z",
+      "isPaid": true
     },
     {
       "id": 4,
-      "date": "Mon, 04 Jan 1971 00:00:00 GMT",
-      "recipentName": "Gerry",
       "amount": 234,
+      "recipentName": "Gerry",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-04T00:00:00.000Z",
       "isPaid": true
     },
     {
       "id": 5,
-      "date": "Tue, 05 Jan 1971 00:00:00 GMT",
-      "recipentName": "Derry",
       "amount": 524,
+      "recipentName": "Derry",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-05T00:00:00.000Z",
       "isPaid": false
     },
     {
       "id": 6,
-      "amount": null,
+      "amount": 0,
       "recipentName": "",
       "recipentAddress": "",
       "senderName": "",
       "senderAddress": "",
-      "date": "2022-12-30T16:35:13.082Z",
+      "date": "2022-12-30T16:35:13.000Z",
       "isPaid": true
     },
     {
@@ -80,7 +92,7 @@
     },
     {
       "id": 11,
-      "amount": 0,
+      "amount": 31,
       "recipentName": "",
       "recipentAddress": "",
       "senderName": "",
