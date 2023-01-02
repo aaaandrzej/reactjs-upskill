@@ -34,7 +34,7 @@ export default function InvoiceForm({ predefinedFields }) {
     invoicesList.length > 0 ? invoicesList.map((invoice) => invoice.id) : [];
 
   const onSubmit = (data) => {
-    const method = data?.id in invoiceIds ? "put" : "post";
+    const method = invoiceIds.includes(data.id) ? "put" : "post";
     const id = method.toLowerCase() === "post" ? "" : data?.id;
     if (!isLoading) {
       handleApiRequest(method, id, data);
