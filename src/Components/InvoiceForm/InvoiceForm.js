@@ -9,6 +9,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
 
+import { useNavigate } from "react-router";
+
 export default function InvoiceForm({ predefinedFields }) {
   const [date, setDate] = useState(predefinedFields.date);
 
@@ -33,12 +35,14 @@ export default function InvoiceForm({ predefinedFields }) {
   const invoiceIds =
     invoicesList.length > 0 ? invoicesList.map((invoice) => invoice.id) : [];
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     const method = invoiceIds.includes(data.id) ? "put" : "post";
     const id = method.toLowerCase() === "post" ? "" : data?.id;
     if (!isLoading) {
       handleApiRequest(method, id, data);
-      window.location = "/";
+      navigate("/");
     }
   };
 
