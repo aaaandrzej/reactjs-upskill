@@ -14,11 +14,12 @@ import moment from "moment";
 import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
 
 export default function InvoiceList() {
-  let {
+  const {
     response: invoiceData,
     isLoading,
-    handleApiRequest,
-  } = useHandleInvoices("");
+    fetchAllInvoices,
+    handleApiRequestDelete,
+  } = useHandleInvoices();
 
   if (isLoading) {
     return <div>Not yet</div>;
@@ -30,7 +31,7 @@ export default function InvoiceList() {
             <TableRow>
               <TableCell>No.</TableCell>
               <TableCell align="right">Date</TableCell>
-              <TableCell align="right">Recipent Name</TableCell>
+              <TableCell align="right">Recipent</TableCell>
               <TableCell align="right">Amount</TableCell>
               <TableCell align="right">Paid</TableCell>
               <TableCell align="right">Actions</TableCell>
@@ -47,7 +48,7 @@ export default function InvoiceList() {
                     <Link to={"/invoice/" + id}>{number}</Link>
                   </TableCell>
                   <TableCell align="right">
-                    {moment(date).format("D MMMM YYYY HH:MM")}
+                    {moment(date).format("D MMMM YYYY")}
                   </TableCell>
                   <TableCell align="right">{recipentName}</TableCell>
                   <TableCell align="right">{amount}</TableCell>
@@ -56,11 +57,11 @@ export default function InvoiceList() {
                     <Link to={"/invoice/" + id}>
                       <EditIcon />
                     </Link>
+                    {/* TODO disable delete links during isLoading */}
                     <Link
                       onClick={() => {
-                        // TODO this needs further refactor after redesigning this hook
-                        handleApiRequest("delete", id, {}).then(
-                          ({ response: invoiceData } = useHandleInvoices(""))
+                        handleApiRequestDelete(String(id)).then(
+                          fetchAllInvoices()
                         );
                       }}
                     >

@@ -11,10 +11,10 @@ export default function EditInvoice() {
     response: invoiceData,
     isLoading,
     error,
-  } = useHandleInvoices(invoiceId);
+  } = useHandleInvoices(String(invoiceId));
 
   if (isLoading) return <div>Not yet</div>;
-  else if (error?.code === "ERR_BAD_REQUEST")
+  if (error?.code === "ERR_BAD_REQUEST")
     return <div>Wrong ID or API error</div>;
-  else return <InvoiceForm predefinedFields={invoiceData} />;
+  return <InvoiceForm predefinedFields={invoiceData} />;
 }

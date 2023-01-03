@@ -14,7 +14,12 @@ import { useNavigate } from "react-router";
 export default function InvoiceForm({ predefinedFields }) {
   const [date, setDate] = useState(predefinedFields.date);
 
-  const { handleSubmit, register, setValue } = useForm({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       number: predefinedFields.number,
       amount: predefinedFields.amount,
@@ -26,24 +31,16 @@ export default function InvoiceForm({ predefinedFields }) {
       isPaid: predefinedFields.isPaid,
     },
   });
-  const {
-    response: invoicesList,
-    isLoading,
-    handleApiRequest,
-  } = useHandleInvoices();
-
-  const invoiceIds =
-    invoicesList.length > 0 ? invoicesList.map((invoice) => invoice.id) : [];
+  const { isLoading, handleApiRequestPost, handleApiRequestPut } =
+    useHandleInvoices();
 
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    const method = invoiceIds.includes(predefinedFields?.id) ? "put" : "post";
-    const id = method.toLowerCase() === "post" ? "" : predefinedFields?.id;
-    if (!isLoading) {
-      handleApiRequest(method, id, data);
-      navigate("/");
-    }
+    predefinedFields.id
+      ? handleApiRequestPut(String(predefinedFields.id), data)
+      : handleApiRequestPost(data);
+    navigate("/");
   };
 
   const theme = createTheme({
@@ -55,17 +52,20 @@ export default function InvoiceForm({ predefinedFields }) {
     },
   });
 
-  return isLoading ? (
-    <div>Not yet</div>
-  ) : (
+  // TODO use spinner from mui instead
+  if (isLoading) return <div>Not yet</div>;
+
+  return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <Box
           sx={{ margin: 1, display: "inline-flex", flexDirection: "column" }}
         >
+          {/* TODO instead of hardcoded message use error from register */}
           <TextField
-            {...register("number")}
-            required
+            {...register("number", { required: true, error: "dfsdffs" })}
+            helperText={errors.number && "Field required"}
+            error={!!errors.number}
             label="No"
             id="standard-basic"
             variant="standard"
@@ -127,6 +127,7 @@ export default function InvoiceForm({ predefinedFields }) {
               defaultChecked={predefinedFields.isPaid}
             />
           </div>
+          {/* TODO disable submit while pending */}
           <ThemeProvider theme={theme}>
             <Button type="submit" variant="contained" color="neutral">
               Submit

@@ -9,17 +9,67 @@ export const useHandleInvoices = (id = "") => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const fetchAllInvoices = () => {
+    handleApiRequestGet();
+  };
+
   useEffect(() => {
-    handleApiRequest("get", id, {});
+    fetchAllInvoices();
   }, []);
 
-  const handleApiRequest = (method, id, data) => {
-    apiClient[method](String(id), data)
+  const handleApiRequestGet = () => {
+    setIsLoading(true);
+    return apiClient
+      .get(id)
       .then((res) => {
         setResponse(res.data);
       })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
   };
-  return { response, isLoading, error, handleApiRequest };
+
+  // TODO move handlers to separate hooks
+  const handleApiRequestPost = (data) => {
+    setIsLoading(true);
+    return apiClient
+      .post("", data)
+      .then((res) => {
+        setResponse(res.data);
+      })
+      .catch((error) => setError(error))
+      .finally(() => setIsLoading(false));
+  };
+
+  const handleApiRequestPut = (id, data) => {
+    setIsLoading(true);
+    return apiClient
+      .put(id, data)
+      .then((res) => {
+        setResponse(res.data);
+      })
+      .catch((error) => setError(error))
+      .finally(() => setIsLoading(false));
+  };
+
+  const handleApiRequestDelete = (id) => {
+    setIsLoading(true);
+    return apiClient
+      .delete(id)
+      .then((res) => {
+        setResponse(res.data);
+      })
+      .catch((error) => setError(error))
+      .finally(() => setIsLoading(false));
+  };
+
+  return {
+    response,
+    isLoading,
+    error,
+    fetchAllInvoices,
+    handleApiRequestGet,
+    handleApiRequestPost,
+    handleApiRequestPut,
+    handleApiRequestDelete,
+  };
 };
