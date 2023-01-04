@@ -56,7 +56,13 @@ export default function InvoiceList() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <Link to={"/invoice/" + id}>{number}</Link>
+                  <Link
+                    to={
+                      isLoadingDelete || isLoadingGet ? "/invoice/" + id : null
+                    }
+                  >
+                    {number}
+                  </Link>
                 </TableCell>
                 <TableCell align="right">
                   {moment(date).format("D MMMM YYYY")}
@@ -65,15 +71,20 @@ export default function InvoiceList() {
                 <TableCell align="right">{amount}</TableCell>
                 <TableCell align="right">{isPaid ? "yes" : "no"}</TableCell>
                 <TableCell align="right">
-                  <Link to={"/invoice/" + id}>
+                  <Link
+                    to={
+                      isLoadingDelete || isLoadingGet ? "/invoice/" + id : null
+                    }
+                  >
                     <EditIcon />
                   </Link>
-                  {/* TODO disable delete links during isLoading */}
                   <Link
                     onClick={() => {
-                      handleApiRequestDelete(String(id)).then(
-                        fetchAllInvoices()
-                      );
+                      isLoadingDelete || isLoadingGet
+                        ? handleApiRequestDelete(String(id)).then(
+                            fetchAllInvoices()
+                          )
+                        : null;
                     }}
                   >
                     <DeleteIcon />

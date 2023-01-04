@@ -136,9 +136,13 @@ export default function InvoiceForm({ predefinedFields }) {
               defaultChecked={predefinedFields.isPaid}
             />
           </div>
-          {/* TODO disable submit while pending */}
           <ThemeProvider theme={theme}>
-            <Button type="submit" variant="contained" color="neutral">
+            <Button
+              type="submit"
+              variant="contained"
+              color="neutral"
+              disabled={isLoading}
+            >
               Submit
             </Button>
           </ThemeProvider>
