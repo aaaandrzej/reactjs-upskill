@@ -3,7 +3,7 @@ import { apiClient } from "../apiClient/apiClient";
 
 export const useGetInvoices = (id = "") => {
   const [response, setResponse] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchAllInvoices = () => {

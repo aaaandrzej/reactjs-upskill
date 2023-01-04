@@ -3,8 +3,7 @@ import { apiClient } from "../apiClient/apiClient";
 
 export const useModifyInvoices = () => {
   const [response, setResponse] = useState([]);
-  // TODO Is that ok to set loading to null here? otherwise it hangs the ui because of loading === true
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleApiRequestPost = (data) => {
