@@ -1,11 +1,16 @@
-import { Box, TextField, Checkbox, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Checkbox,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 
 import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
 
@@ -52,8 +57,12 @@ export default function InvoiceForm({ predefinedFields }) {
     },
   });
 
-  // TODO use spinner from mui instead
-  if (isLoading) return <div>Not yet</div>;
+  if (isLoading)
+    return (
+      <Box className="flexbox">
+        <CircularProgress />
+      </Box>
+    );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
