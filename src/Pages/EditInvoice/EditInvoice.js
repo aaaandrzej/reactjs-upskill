@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { CircularProgress, Box } from "@mui/material";
 import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
 
-import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
+import { useGetInvoices } from "../../Hooks/useGetInvoices/useGetInvoices";
 
 export default function EditInvoice() {
   const { invoiceId } = useParams();
@@ -11,7 +11,7 @@ export default function EditInvoice() {
     response: invoiceData,
     isLoading,
     error,
-  } = useHandleInvoices(String(invoiceId));
+  } = useGetInvoices(String(invoiceId));
 
   if (isLoading)
     return (

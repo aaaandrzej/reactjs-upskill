@@ -15,17 +15,20 @@ import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 import moment from "moment";
-import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
+import { useGetInvoices } from "../../Hooks/useGetInvoices/useGetInvoices";
+import { useDeleteInvoices } from "../../Hooks/useDeleteInvoices/useDeleteInvoices";
 
 export default function InvoiceList() {
   const {
     response: invoiceData,
-    isLoading,
+    isLoading: isLoadingGet,
     fetchAllInvoices,
-    handleApiRequestDelete,
-  } = useHandleInvoices();
+  } = useGetInvoices();
 
-  if (isLoading)
+  const { isLoading: isLoadingDelete, handleApiRequestDelete } =
+    useDeleteInvoices();
+
+  if (isLoadingGet && isLoadingDelete)
     return (
       <Box className="flexbox">
         <CircularProgress />

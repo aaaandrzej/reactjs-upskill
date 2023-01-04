@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 
-import { useHandleInvoices } from "../../Hooks/useHandleInvoices/useHandleInvoices";
+import { useModifyInvoices } from "../../Hooks/useModifyInvoices/useModifyInvoices";
 
 import { useNavigate } from "react-router";
 
@@ -37,7 +37,7 @@ export default function InvoiceForm({ predefinedFields }) {
     },
   });
   const { isLoading, handleApiRequestPost, handleApiRequestPut } =
-    useHandleInvoices();
+    useModifyInvoices();
 
   const navigate = useNavigate();
 
