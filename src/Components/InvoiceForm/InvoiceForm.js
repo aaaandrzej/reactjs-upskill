@@ -70,10 +70,9 @@ export default function InvoiceForm({ predefinedFields }) {
         <Box
           sx={{ margin: 1, display: "inline-flex", flexDirection: "column" }}
         >
-          {/* TODO instead of hardcoded message use error from register */}
           <TextField
-            {...register("number", { required: true, error: "dfsdffs" })}
-            helperText={errors.number && "Field required"}
+            {...register("number", { required: "Field required" })}
+            helperText={errors?.number?.message}
             error={!!errors.number}
             label="No"
             id="standard-basic"
