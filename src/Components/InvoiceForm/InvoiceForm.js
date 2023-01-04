@@ -59,7 +59,7 @@ export default function InvoiceForm({ predefinedFields }) {
 
   if (isLoading)
     return (
-      <Box className="flexbox">
+      <Box className="full-height-wrapper">
         <CircularProgress />
       </Box>
     );

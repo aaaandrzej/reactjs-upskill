@@ -6,12 +6,8 @@ export const useGetInvoices = (id = "") => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchAllInvoices = () => {
-    handleApiRequestGet();
-  };
-
   useEffect(() => {
-    fetchAllInvoices();
+    handleApiRequestGet();
   }, []);
 
   const handleApiRequestGet = () => {
@@ -29,7 +25,6 @@ export const useGetInvoices = (id = "") => {
     response,
     isLoading,
     error,
-    fetchAllInvoices,
     handleApiRequestGet,
   };
 };

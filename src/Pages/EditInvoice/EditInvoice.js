@@ -15,13 +15,13 @@ export default function EditInvoice() {
 
   if (isLoading)
     return (
-      <Box className="flexbox">
+      <Box className="full-height-wrapper">
         <CircularProgress />
       </Box>
     );
 
   if (error?.code === "ERR_BAD_REQUEST")
-    return <Box className="flexbox">Wrong ID or API error</Box>;
+    return <Box className="full-height-wrapper">Wrong ID or API error</Box>;
 
   return <InvoiceForm predefinedFields={invoiceData} />;
 }

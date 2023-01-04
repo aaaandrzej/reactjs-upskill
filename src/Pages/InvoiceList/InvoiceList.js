@@ -22,15 +22,17 @@ export default function InvoiceList() {
   const {
     response: invoiceData,
     isLoading: isLoadingGet,
-    fetchAllInvoices,
+    handleApiRequestGet,
   } = useGetInvoices();
 
   const { isLoading: isLoadingDelete, handleApiRequestDelete } =
     useDeleteInvoices();
 
-  if (isLoadingGet && isLoadingDelete)
+  const isLoading = isLoadingDelete || isLoadingGet;
+
+  if (isLoading)
     return (
-      <Box className="flexbox">
+      <Box className="full-height-wrapper">
         <CircularProgress />
       </Box>
     );
@@ -56,13 +58,7 @@ export default function InvoiceList() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <Link
-                    to={
-                      isLoadingDelete || isLoadingGet ? "/invoice/" + id : null
-                    }
-                  >
-                    {number}
-                  </Link>
+                  <Link to={isLoading ? "/invoice/" + id : null}>{number}</Link>
                 </TableCell>
                 <TableCell align="right">
                   {moment(date).format("D MMMM YYYY")}
@@ -71,18 +67,14 @@ export default function InvoiceList() {
                 <TableCell align="right">{amount}</TableCell>
                 <TableCell align="right">{isPaid ? "yes" : "no"}</TableCell>
                 <TableCell align="right">
-                  <Link
-                    to={
-                      isLoadingDelete || isLoadingGet ? "/invoice/" + id : null
-                    }
-                  >
+                  <Link to={!isLoading ? "/invoice/" + id : null}>
                     <EditIcon />
                   </Link>
                   <Link
                     onClick={() => {
-                      isLoadingDelete || isLoadingGet
+                      !isLoading
                         ? handleApiRequestDelete(String(id)).then(
-                            fetchAllInvoices()
+                            handleApiRequestGet()
                           )
                         : null;
                     }}
