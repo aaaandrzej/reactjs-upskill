@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import InfoIcon from "@mui/icons-material/Info";
-import CloseIcon from "@mui/icons-material/Close";
+import { Box, Typography } from "@mui/material";
+import { Info as InfoIcon, Close as CloseIcon } from "@mui/icons-material";
+
 import strings from "../../strings.json";
-import { Typography } from "@mui/material";
 
 export const Info = () => {
   const [showInfo, setShowInfo] = useState(false);

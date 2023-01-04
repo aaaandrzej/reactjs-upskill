@@ -1,0 +1,81 @@
+{
+  "invoices": [
+    {
+      "number": "1/2022",
+      "amount": 2011.01,
+      "recipentName": "Jerry",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-01T00:00:00.000Z",
+      "isPaid": true,
+      "id": 1
+    },
+    {
+      "number": "2/2022",
+      "amount": 4.01,
+      "recipentName": "Merry",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-02T00:00:00.000Z",
+      "isPaid": true,
+      "id": 2
+    },
+    {
+      "number": "3/2022",
+      "amount": 124,
+      "recipentName": "Berry",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-03T00:00:00.000Z",
+      "isPaid": true,
+      "id": 3
+    },
+    {
+      "number": "4/2022",
+      "amount": 234,
+      "recipentName": "Gerry",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-04T00:00:00.000Z",
+      "isPaid": true,
+      "id": 4
+    },
+    {
+      "number": "5/2022",
+      "amount": 524,
+      "recipentName": "Derry",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "1971-01-05T00:00:00.000Z",
+      "isPaid": false,
+      "id": 5
+    },
+    {
+      "number": "8/2022",
+      "amount": 0,
+      "recipentName": "",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "2022-12-30T16:35:13.000Z",
+      "isPaid": true,
+      "id": 6
+    },
+    {
+      "number": "1/2023",
+      "amount": 123,
+      "recipentName": "",
+      "recipentAddress": "",
+      "senderName": "",
+      "senderAddress": "",
+      "date": "2023-01-02T15:39:19.094Z",
+      "isPaid": true,
+      "id": 7
+    }
+  ]
+}

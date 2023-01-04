@@ -1,16 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import MenuItem from "@mui/material/MenuItem";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import {
+  Container,
+  MenuItem,
+  Button,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+} from "@mui/material";
+import {
+  MonetizationOn as MonetizationOnIcon,
+  Menu as MenuIcon,
+} from "@mui/icons-material";
 
 import strings from "../../strings.json";
 import { Info } from "./Info";
@@ -53,7 +57,7 @@ export function Navigation({ routes }) {
   };
 
   return (
-    <AppBar position="static" className="flexappbar">
+    <AppBar position="static" className="fixed-height-appbar-wrapper">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* Narrow view */}

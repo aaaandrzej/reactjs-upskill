@@ -1,44 +1,51 @@
-import { Box, TextField, Checkbox, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Checkbox,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 
-import mockedData from "../../mockedData.json";
+import { useModifyInvoices } from "../../Hooks/useModifyInvoices/useModifyInvoices";
 
-export default function InvoiceForm() {
-  const { invoiceId } = useParams();
+import { useNavigate } from "react-router";
 
-  // TODO move this logic level above
-  const preDefinedFields = invoiceId
-    ? mockedData.filter((item) => item.id === invoiceId)[0]
-    : undefined;
+export default function InvoiceForm({ predefinedFields }) {
+  const [date, setDate] = useState(predefinedFields.date);
 
-  // TODO store dates as objects instead of strings
-  const [date, setDate] = useState(preDefinedFields?.date || "");
-
-  const { handleSubmit, register, setValue } = useForm({
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      id: preDefinedFields?.id || "",
-      amount: preDefinedFields?.amount || "",
-      recipentName: preDefinedFields?.recipentName || "",
-      recipentAddress: preDefinedFields?.recipentAddress || "",
-      senderName: preDefinedFields?.senderName || "",
-      senderAddress: preDefinedFields?.senderAddress || "",
+      number: predefinedFields.number,
+      amount: predefinedFields.amount,
+      recipentName: predefinedFields.recipentName,
+      recipentAddress: predefinedFields.recipentAddress,
+      senderName: predefinedFields.senderName,
+      senderAddress: predefinedFields.senderAddress,
       date: date,
-      isPaid: preDefinedFields?.isPaid || false,
+      isPaid: predefinedFields.isPaid,
     },
   });
+  const { isLoading, handleApiRequestPost, handleApiRequestPut } =
+    useModifyInvoices();
 
-  // TODO convert this to saving object instead of just logging input data
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
-    console.log({
-      ...data,
-    });
+    predefinedFields.id
+      ? handleApiRequestPut(String(predefinedFields.id), data)
+      : handleApiRequestPost(data);
+    navigate("/");
   };
 
   const theme = createTheme({
@@ -50,6 +57,13 @@ export default function InvoiceForm() {
     },
   });
 
+  if (isLoading)
+    return (
+      <Box className="full-height-wrapper">
+        <CircularProgress />
+      </Box>
+    );
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -57,7 +71,9 @@ export default function InvoiceForm() {
           sx={{ margin: 1, display: "inline-flex", flexDirection: "column" }}
         >
           <TextField
-            {...register("id")}
+            {...register("number", { required: "Field required" })}
+            helperText={errors?.number?.message}
+            error={!!errors.number}
             label="No"
             id="standard-basic"
             variant="standard"
@@ -76,7 +92,9 @@ export default function InvoiceForm() {
           />
 
           <TextField
-            {...register("amount")}
+            {...register("amount", { valueAsNumber: true })}
+            type="number"
+            inputProps={{ step: "0.01" }}
             label="Amount"
             id="standard-basic"
             variant="standard"
@@ -114,11 +132,16 @@ export default function InvoiceForm() {
             Paid
             <Checkbox
               {...register("isPaid")}
-              defaultChecked={Boolean(preDefinedFields?.isPaid)}
+              defaultChecked={predefinedFields.isPaid}
             />
           </div>
           <ThemeProvider theme={theme}>
-            <Button type="submit" variant="contained" color="neutral">
+            <Button
+              type="submit"
+              variant="contained"
+              color="neutral"
+              disabled={isLoading}
+            >
               Submit
             </Button>
           </ThemeProvider>
