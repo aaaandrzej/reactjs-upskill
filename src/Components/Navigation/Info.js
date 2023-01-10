@@ -13,11 +13,12 @@ export const Info = () => {
           setShowInfo(true);
         }}
       />
-      {showInfo && <Modal setShowInfo={setShowInfo} />}
+      <Modal setShowInfo={setShowInfo} isShown={showInfo} />
     </div>
   );
 };
-const Modal = ({ setShowInfo }) => {
+export const Modal = ({ setShowInfo, isShown }) => {
+  if (!isShown) return null;
   return (
     <Box
       sx={{
@@ -33,6 +34,7 @@ const Modal = ({ setShowInfo }) => {
       <Typography sx={{ margin: "5%" }}>{strings.loremIpsum}</Typography>
 
       <CloseIcon
+        data-testid="closeButton"
         onClick={() => {
           setShowInfo(false);
         }}
