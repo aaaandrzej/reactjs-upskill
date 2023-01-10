@@ -1,17 +1,28 @@
 import { render, screen } from "@testing-library/react";
-import { jest } from "@jest/globals";
+import "@testing-library/jest-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import InvoiceForm from "./InvoiceForm";
 
 test("test1", () => {
+  
   // TODO fix hook mock
-  //   let mockIsLoading = false
+  let mockIsLoading = true;
 
-  //   jest.mock('../../Hooks/useGetInvoices', () => {
-  //     return jest.fn(() => ({
-  //        isLoading: mockIsLoading
-  //     }))
-  // })
+  jest.mock("../../Hooks/useModifyInvoices/useModifyInvoices", () => {
+    return jest.fn(() => ({
+      isLoading: mockIsLoading,
+    }));
+  });
+
+  jest.mock("../../Hooks/useModifyInvoices/useModifyInvoices", () => ({
+    useModifyInvoices: jest
+      .fn()
+      .mockReturnValue({
+        data: { ...MockData },
+        isLoading: mockIsLoading,
+        error: {},
+      }),
+  }));
 
   render(
     <Router>
