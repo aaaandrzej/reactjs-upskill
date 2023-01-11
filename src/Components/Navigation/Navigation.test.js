@@ -1,8 +1,13 @@
 import { render, screen } from "@testing-library/react";
-import App from "./App";
+import { Navigation } from "./Navigation";
+import { BrowserRouter as Router } from "react-router-dom";
 
-test("renders website name", () => {
-  render(<App />);
+test("navbar renders website name", () => {
+  render(
+    <Router>
+      <Navigation routes={{}} />
+    </Router>
+  );
   const siteNameOccurencies = screen.getAllByText("Księgowość Kogucik");
   siteNameOccurencies.forEach((siteName) => {
     expect(siteName).toBeInTheDocument();
