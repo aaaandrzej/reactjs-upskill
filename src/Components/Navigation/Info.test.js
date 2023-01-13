@@ -29,7 +29,7 @@ describe("Info tests", () => {
     fireEvent.click(closeButton);
 
     waitFor(() => {
-      expect(setShowInfo).toBeCalledWith(false);
+      expect(setShowInfo).toBeCalledWith(false); // this passes with either true or false, and with not or without...
     });
   });
 });
