@@ -19,7 +19,7 @@ describe("Info tests", () => {
     expect(loremIpsum).not.toBeInTheDocument();
   });
 
-  test("modal is being closed on user click", () => {
+  test("modal is being closed on user click", async () => {
     const setShowInfo = jest.fn();
 
     render(<Modal setShowInfo={setShowInfo} isShown={true} />);
@@ -28,8 +28,8 @@ describe("Info tests", () => {
 
     fireEvent.click(closeButton);
 
-    waitFor(() => {
-      expect(setShowInfo).toBeCalledWith(false); // this passes with either true or false, and with not or without...
+    await waitFor(() => {
+      expect(setShowInfo).toBeCalledWith(false);
     });
   });
 });
