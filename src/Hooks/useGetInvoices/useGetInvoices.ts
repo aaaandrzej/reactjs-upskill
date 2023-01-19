@@ -1,10 +1,23 @@
 import { useEffect, useState } from "react";
 import { apiClient } from "../apiClient/apiClient";
+import {AxiosError} from "axios"
 
-export const useGetInvoices = (id = "") => {
-  const [response, setResponse] = useState([]);
+export interface APIResponse {
+    number: string,
+    amount: number,
+    recipentName: string,
+    recipentAddress: string,
+    senderName: string,
+    senderAddress: string,
+    date: Date,
+    isPaid: boolean,
+    id: number
+}
+
+export const useGetInvoices = (id: string = "") => {
+  const [response, setResponse] = useState([] as APIResponse[]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({} as AxiosError);
 
   useEffect(() => {
     handleApiRequestGet();
@@ -16,6 +29,7 @@ export const useGetInvoices = (id = "") => {
       .get(id)
       .then((res) => {
         setResponse(res.data);
+        console.log(res.data)
       })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));

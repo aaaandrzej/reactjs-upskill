@@ -10,13 +10,54 @@ import { useForm } from "react-hook-form";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+
+import { Moment } from "moment";
+
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 
 import { useModifyInvoices } from "../../Hooks/useModifyInvoices/useModifyInvoices";
 
 import { useNavigate } from "react-router";
 
-export default function InvoiceForm({ predefinedFields }) {
+interface PredefinedFieldsProps {
+  number: string;
+  amount: number;
+  recipentName: string;
+  recipentAddress: string;
+  senderName: string;
+  senderAddress: string;
+  date: Moment;
+  isPaid: boolean;
+  id?: number;
+}
+
+interface InvoiceFormProps {
+  predefinedFields: PredefinedFieldsProps;
+}
+
+declare module "@mui/material/styles" {
+  interface Theme {
+    status: {
+      danger: React.CSSProperties["color"];
+    };
+  }
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+  interface PaletteOptions {
+    neutral: PaletteOptions["primary"];
+  }
+}
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    neutral: true;
+  }
+}
+
+export default function InvoiceForm({ predefinedFields }: InvoiceFormProps) {
   const [date, setDate] = useState(predefinedFields.date);
 
   const {
@@ -41,7 +82,7 @@ export default function InvoiceForm({ predefinedFields }) {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: PredefinedFieldsProps) => {
     predefinedFields.id
       ? handleApiRequestPut(String(predefinedFields.id), data)
       : handleApiRequestPost(data);
@@ -83,8 +124,8 @@ export default function InvoiceForm({ predefinedFields }) {
             label="Date"
             value={date}
             onChange={(newValue) => {
-              setValue("date", newValue._d);
-              setDate(newValue._d);
+              setValue("date", newValue?._d);
+              setDate(newValue?._d);
             }}
             renderInput={(params) => (
               <TextField {...params} id="standard-basic" variant="standard" />
