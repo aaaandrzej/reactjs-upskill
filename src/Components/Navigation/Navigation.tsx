@@ -44,12 +44,6 @@ interface Routes {
   list: Route;
 }
 
-declare module "react-router-dom/Link" {
-  interface LinkProps {
-    label: string;
-  }
-}
-
 export function Navigation({ routes }: NavigationProps) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
@@ -64,7 +58,7 @@ export function Navigation({ routes }: NavigationProps) {
   const RouteItems = ({ routes, wide }: RouteItemsProps) => (
     <>
       {Object.values(routes).map(({ route, label }: Route) => (
-        <Link to={route} label={label} key={route}>
+        <Link to={route} key={route}>
           <LinkVariant label={label} wide={wide} />
         </Link>
       ))}

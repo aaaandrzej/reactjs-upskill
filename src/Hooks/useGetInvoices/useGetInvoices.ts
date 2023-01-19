@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { apiClient } from "../apiClient/apiClient";
 import { AxiosError } from "axios";
 
@@ -19,21 +19,22 @@ export const useGetInvoices = (id: string = "") => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({} as AxiosError);
 
-  useEffect(() => {
-    handleApiRequestGet();
-  }, []);
-
-  const handleApiRequestGet = () => {
+  const handleApiRequestGet = useCallback(() => {
     setIsLoading(true);
     return apiClient
       .get(id)
       .then((res) => {
         setResponse(res.data);
-        console.log(res.data);
       })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
-  };
+  },[id]);
+
+  useEffect(() => {
+    handleApiRequestGet();
+  }, [handleApiRequestGet]);
+  
+
 
   return {
     response,
