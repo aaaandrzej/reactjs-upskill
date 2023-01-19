@@ -16,7 +16,7 @@ export interface APIResponse {
 
 export const useGetInvoices = (id: string = "") => {
   const [response, setResponse] = useState({} as APIResponse);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({} as AxiosError);
 
   const handleApiRequestGet = useCallback(() => {
@@ -28,13 +28,11 @@ export const useGetInvoices = (id: string = "") => {
       })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
-  },[id]);
+  }, [id]);
 
   useEffect(() => {
     handleApiRequestGet();
   }, [handleApiRequestGet]);
-  
-
 
   return {
     response,
