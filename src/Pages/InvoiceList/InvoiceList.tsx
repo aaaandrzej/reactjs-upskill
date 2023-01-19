@@ -9,10 +9,11 @@ import {
   Box,
   TableCell,
   TableContainer,
+  IconButton,
 } from "@mui/material";
 import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import moment from "moment";
 import { useGetInvoices } from "../../Hooks/useGetInvoices/useGetInvoices";
@@ -29,6 +30,8 @@ export default function InvoiceList() {
     useDeleteInvoices();
 
   const isLoading = isLoadingDelete || isLoadingGet;
+
+  const navigate = useNavigate();
 
   if (isLoading)
     return (
@@ -58,7 +61,7 @@ export default function InvoiceList() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <Link to={!isLoading ? "/invoice/" + id : null}>{number}</Link>
+                  <Link to={"/invoice/" + id}>{number}</Link>
                 </TableCell>
                 <TableCell align="right">
                   {moment(date).format("D MMMM YYYY")}
@@ -67,20 +70,19 @@ export default function InvoiceList() {
                 <TableCell align="right">{amount}</TableCell>
                 <TableCell align="right">{isPaid ? "yes" : "no"}</TableCell>
                 <TableCell align="right">
-                  <Link to={!isLoading ? "/invoice/" + id : null}>
+                  <IconButton onClick={() => navigate("/invoice/" + id)}>
                     <EditIcon />
-                  </Link>
-                  <Link
+                  </IconButton>
+                  <IconButton
                     onClick={() => {
-                      !isLoading
-                        ? handleApiRequestDelete(String(id)).then(
-                            handleApiRequestGet()
-                          )
-                        : null;
+                      handleApiRequestDelete(String(id)).then(() =>
+                        handleApiRequestGet()
+                      );
                     }}
+                    disabled={isLoading}
                   >
                     <DeleteIcon />
-                  </Link>
+                  </IconButton>
                 </TableCell>
               </TableRow>
             )

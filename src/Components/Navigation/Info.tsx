@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import { Box, Typography } from "@mui/material";
 import { Info as InfoIcon, Close as CloseIcon } from "@mui/icons-material";
 
@@ -6,6 +6,9 @@ import strings from "../../strings.json";
 
 export const Info = () => {
   const [showInfo, setShowInfo] = useState(false);
+  const handleSetShowInfo = (newState: boolean) => {
+    setShowInfo(newState);
+  };
   return (
     <div>
       <InfoIcon
@@ -13,11 +16,18 @@ export const Info = () => {
           setShowInfo(true);
         }}
       />
-      {showInfo && <Modal setShowInfo={setShowInfo} />}
+      <Modal setShowInfo={handleSetShowInfo} isShown={showInfo} />
     </div>
   );
 };
-const Modal = ({ setShowInfo }) => {
+
+interface ModalProps {
+  setShowInfo: (newState: boolean) => void;
+  isShown: boolean;
+}
+
+export const Modal: FC<ModalProps> = ({ setShowInfo, isShown }) => {
+  if (!isShown) return null;
   return (
     <Box
       sx={{
@@ -33,6 +43,7 @@ const Modal = ({ setShowInfo }) => {
       <Typography sx={{ margin: "5%" }}>{strings.loremIpsum}</Typography>
 
       <CloseIcon
+        data-testid="closeButton"
         onClick={() => {
           setShowInfo(false);
         }}

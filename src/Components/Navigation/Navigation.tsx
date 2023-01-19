@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import type { MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -19,10 +20,34 @@ import {
 import strings from "../../strings.json";
 import { Info } from "./Info";
 
-export function Navigation({ routes }) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+interface NavigationProps {
+  routes: Routes;
+}
 
-  const handleOpenNavMenu = (event) => {
+interface RouteItemsProps {
+  routes: Routes;
+  wide: boolean;
+}
+
+interface LinkVariantProps {
+  label: string;
+  wide: boolean;
+}
+
+interface Route {
+  route: string;
+  label: string;
+}
+
+interface Routes {
+  add: Route;
+  list: Route;
+}
+
+export function Navigation({ routes }: NavigationProps) {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
@@ -30,14 +55,17 @@ export function Navigation({ routes }) {
     setAnchorElNav(null);
   };
 
-  const RouteItems = ({ routes, wide }) =>
-    Object.values(routes).map(({ route, label }) => (
-      <Link to={route} label={label} key={route}>
-        <LinkVariant label={label} wide={wide} />
-      </Link>
-    ));
+  const RouteItems = ({ routes, wide }: RouteItemsProps) => (
+    <>
+      {Object.values(routes).map(({ route, label }: Route) => (
+        <Link to={route} key={route}>
+          <LinkVariant label={label} wide={wide} />
+        </Link>
+      ))}
+    </>
+  );
 
-  const LinkVariant = ({ label, wide }) => {
+  const LinkVariant = ({ label, wide }: LinkVariantProps) => {
     if (wide)
       return (
         <Button

@@ -2,8 +2,9 @@ import React from "react";
 import InvoiceForm from "../../Components/InvoiceForm/InvoiceForm";
 
 export const emptyInvoice = {
-  id: null,
-  amount: null,
+  id: undefined,
+  number: "",
+  amount: 0,
   recipentName: "",
   recipentAddress: "",
   senderName: "",

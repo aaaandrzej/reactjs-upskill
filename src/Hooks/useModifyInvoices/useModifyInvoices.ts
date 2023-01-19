@@ -1,12 +1,15 @@
+import { AxiosError } from "axios";
 import { useState } from "react";
+import { PredefinedFieldsProps } from "../../Components/InvoiceForm/InvoiceForm";
 import { apiClient } from "../apiClient/apiClient";
+import { APIResponse } from "../useGetInvoices/useGetInvoices";
 
 export const useModifyInvoices = () => {
-  const [response, setResponse] = useState([]);
+  const [response, setResponse] = useState({} as APIResponse);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({} as AxiosError);
 
-  const handleApiRequestPost = (data) => {
+  const handleApiRequestPost = (data: PredefinedFieldsProps) => {
     setIsLoading(true);
     return apiClient
       .post("", data)
@@ -17,7 +20,7 @@ export const useModifyInvoices = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const handleApiRequestPut = (id, data) => {
+  const handleApiRequestPut = (id: string, data: PredefinedFieldsProps) => {
     setIsLoading(true);
     return apiClient
       .put(id, data)
