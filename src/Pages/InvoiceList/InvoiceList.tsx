@@ -75,7 +75,7 @@ export default function InvoiceList() {
                   </IconButton>
                   <IconButton
                     onClick={() => {
-                      handleApiRequestDelete(String(id)).then(
+                      handleApiRequestDelete(String(id)).then(() =>
                         handleApiRequestGet()
                       );
                     }}

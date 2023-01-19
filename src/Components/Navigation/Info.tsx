@@ -6,7 +6,9 @@ import strings from "../../strings.json";
 
 export const Info = () => {
   const [showInfo, setShowInfo] = useState(false);
-  const handleSetShowInfo = (newState: boolean) => {setShowInfo(newState)}
+  const handleSetShowInfo = (newState: boolean) => {
+    setShowInfo(newState);
+  };
   return (
     <div>
       <InfoIcon
@@ -19,8 +21,10 @@ export const Info = () => {
   );
 };
 
-interface ModalProps {setShowInfo: (newState: boolean) => void, 
-  isShown: boolean}
+interface ModalProps {
+  setShowInfo: (newState: boolean) => void;
+  isShown: boolean;
+}
 
 export const Modal: FC<ModalProps> = ({ setShowInfo, isShown }) => {
   if (!isShown) return null;
